@@ -3,18 +3,20 @@ import matplotlib.pyplot as plt
 
 alfa = (10 / 360) * 2 * np.pi
 beta = (30 / 360) * 2 * np.pi
-b = 0.73 * 0
+b = 0.71
 g = 9.8
 m = 0.5
 R_engine = 5
-u_max = 120
-u_min = -120
-dt = 0.001
+u_max = 60
+u_min = -60
+dt = 0.01
 V_desired = 25 # m/s
+
+road_slope = 0.05
 
 
 def u(e, e_sum):
-    u_desired = 15 * e + 0.1 * e_sum
+    u_desired = 0.5 * e + 0.1 * e_sum
     if u_desired < u_min:
         return u_min
     if u_desired > u_max:
@@ -43,7 +45,7 @@ def model(u_curr, v_prev, is_backwards = False): # returns v_curr
     # A * v_curr * v_curr * v_curr + m * v_curr * v_curr / dt + v_curr(-(m * v_prev) / dt + np.sin(alfa) * m * g) - (u_curr * u_curr) / R = 0
     
     # print([A, m/dt, -(m * v_prev)/ dt + np.sin(alfa) * m * g, - (u_curr * u_curr) / R_engine])
-    output_roots = np.roots([b, m/dt, -(m * v_prev)/ dt + np.sin(alfa) * m * g, - (u_curr * u_curr) / R_engine])
+    output_roots = np.roots([b, m/dt, -(m * v_prev)/ dt + np.sin(np.arctan(road_slope)) * m * g, - (u_curr * u_curr) / R_engine])
     # print(u_curr)
 
     for root in output_roots:
@@ -68,7 +70,7 @@ def calculate(u_arr, v_arr, e_sum):
 def run():
     e_sum = 0
     u_arr = np.array([0]) # V
-    v_arr = np.array([15]) # m/s
+    v_arr = np.array([0]) # m/s
     t_arr = np.arange(0, 10, dt)
     for t in range(t_arr.shape[0] - 1):
         u_arr, v_arr, e_sum = calculate(u_arr, v_arr, e_sum)

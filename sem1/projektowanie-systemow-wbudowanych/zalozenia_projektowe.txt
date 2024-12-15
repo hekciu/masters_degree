@@ -1,0 +1,13 @@
+Projekt - nakładka na raspberry pi zero, funkcjonalności:
+- zasilanie z akumulatorów umieszczonych na płytce
+- zbieranie danych z kilku czujników - PMS5003, DHT22 + jeszcze jakiś ale musze się zastanowić co by się przydało:)
+- zbieranie danych o poziomie naładowania akumulatorów
+- udostępnienie dwóch gniazd micro USB, jednego do ładowania akumulatorów oraz drugiego do programowania raspberry pi
+- możliwość pracy przy podłączeniu 'na stałe' do zasilania zewnętrznego
+- switch on-off załączający zasilanie dla całego systemu
+- zestaw 5 diod informujących o poziomie naładowania akumulatorów
+- 3 diody informujące kolejno o - załączeniu zasilania, podłączeniu do sieci Wi-Fi, aktualnym przesyłaniu danych
+
+Ogólny zamysł projektu jest taki żeby finalnie móc wyświetlić dane pogodowe z kilku odrębnych miejsc (każde urządzenie ma mieć nazwę -
+identyfikator), przy jednoczesnym monitorowaniu poziomu naładowania akumulatorów. Idealnie by było jakby konstrukcja płytki umożliwiała łatwe
+opakowanie w obudowę, aczkolwiek to chyba bardziej plany na przyszłość :).
