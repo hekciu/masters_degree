@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<manifest xmlns:a='http://schemas.android.com/apk/res/android' package='com.tanker' a:versionCode='0' a:versionName='0'>
+    <uses-permission a:name='android.permission.BLUETOOTH_SCAN'/>
+    <uses-permission a:name='android.permission.BLUETOOTH_CONNECT'/>
+    <uses-permission a:name='android.permission.BLUETOOTH'/>
+    <uses-permission a:name='android.permission.BLUETOOTH_ADMIN'/>
+    <uses-permission a:name='android.permission.ACCESS_COARSE_LOCATION'/>
+    <uses-sdk a:minSdkVersion='5'/>
+    <uses-feature a:name="android.hardware.bluetooth_le" a:required="true"/>
+    <application a:label='Tanker' a:debuggable="true">
+        <activity a:name='com.tanker.MainActivity' a:screenOrientation="landscape">
+             <intent-filter>
+                <category a:name='android.intent.category.LAUNCHER'/>
+                <action a:name='android.intent.action.MAIN'/>
+             </intent-filter>
+        </activity>
+        <service
+            a:name='com.tanker.BluetoothService'
+            a:enabled='true'
+            a:exported='false'
+            a:label='Bluetooth Service' >
+        </service>
+    </application>
+</manifest>
