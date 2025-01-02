@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.view.View;
+import android.view.MotionEvent;
 import android.graphics.Color;
 import android.content.Intent;
 import android.util.Log;
@@ -36,13 +37,23 @@ public class MainActivity extends Activity {
         }
     };
 
-    public void drive (boolean A, boolean W, boolean S, boolean D) {
+    public void drive(BluetoothService.DriveKey key) {
         if (this.bluetoothService == null) {
             Log.d(LOG_TAG, "tried to send message to service, but this.bluetoothService is null");
             return;
         }
 
-        this.bluetoothService.setDriveData(A, W, S, D);
+        this.bluetoothService.setDriveData(key);
+        this.bluetoothService.sendData();
+    }
+
+    public void stop() {
+        if (this.bluetoothService == null) {
+            Log.d(LOG_TAG, "tried to send message to service, but this.bluetoothService is null");
+            return;
+        }
+
+        this.bluetoothService.resetDriveData();
         this.bluetoothService.sendData();
     }
 
@@ -68,6 +79,71 @@ public class MainActivity extends Activity {
         } else {
             bindService(this.bindBluetoothServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
         }
+
+        Button buttonRight = findViewById(R.id.buttonRight);
+        Button buttonLeft = findViewById(R.id.buttonLeft);
+        Button buttonUp = findViewById(R.id.buttonUp);
+        Button buttonDown = findViewById(R.id.buttonDown);
+
+        buttonLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    drive(BluetoothService.DriveKey.LEFT); 
+                    Log.d(LOG_TAG, "DRIVIN LEFT"); 
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    stop(); 
+                    Log.d(LOG_TAG, "DRIVIN LEFT STOPPED"); 
+                }
+
+                return false;
+            }
+        });
+
+        buttonUp.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    drive(BluetoothService.DriveKey.UP); 
+                    Log.d(LOG_TAG, "DRIVIN UP"); 
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    stop(); 
+                    Log.d(LOG_TAG, "DRIVIN UP STOPPED"); 
+                }
+
+                return false;
+            }
+        });
+
+        buttonDown.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    drive(BluetoothService.DriveKey.DOWN); 
+                    Log.d(LOG_TAG, "DRIVIN DOWN"); 
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    stop(); 
+                    Log.d(LOG_TAG, "DRIVIN DOWN STOPPED"); 
+                }
+
+                return false;
+            }
+        });
+
+        buttonRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    drive(BluetoothService.DriveKey.RIGHT); 
+                    Log.d(LOG_TAG, "DRIVIN RIGHT"); 
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    stop(); 
+                    Log.d(LOG_TAG, "DRIVIN RIGHT STOPPED"); 
+                }
+
+                return false;
+            }
+        });
     }
 
     @Override 

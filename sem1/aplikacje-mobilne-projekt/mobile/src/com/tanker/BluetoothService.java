@@ -30,7 +30,7 @@ public class BluetoothService extends Service {
     private String driveCharacteristicUuid = "0000ff01-0000-1000-8000-00805f9b34fb";
     private BluetoothGatt bluetoothGatt = null;
     private BluetoothGattCharacteristic driveCharacteristic = null;
-    private int driveData;
+    private String driveString;
     private static final String LOG_TAG = "tanker_app";
     
     public enum DriveKey {
@@ -55,7 +55,7 @@ public class BluetoothService extends Service {
         this.adapter = manager.getAdapter();
         this.scanner = this.adapter.getBluetoothLeScanner();
         this.scanCallback = this.getScanCallback();
-        this.setDriveData(false, false, false, false);
+        this.resetDriveData();
 
         this.espMacAddress = Secrets.getAddress();
 
@@ -93,8 +93,23 @@ public class BluetoothService extends Service {
 
     public void setDriveData(DriveKey key) {
         switch(key) {
-
+            case UP:
+                this.driveString = "up";
+                break;
+            case DOWN:
+                this.driveString = "down";
+                break;
+            case LEFT:
+                this.driveString = "left";
+                break;
+            case RIGHT:
+                this.driveString = "right";
+                break;
         }
+    }
+
+    public void resetDriveData() {
+        this.driveString = "";
     }
 
     public void sendData() {
@@ -104,7 +119,7 @@ public class BluetoothService extends Service {
         }
 
         try {
-            Log.d(LOG_TAG, "writing to esp, drive string: " + this.driveString);
+            Log.d(LOG_TAG, "writing to esp, drive data: " + this.driveString);
 
             this.driveCharacteristic.setValue(this.driveString);
 
