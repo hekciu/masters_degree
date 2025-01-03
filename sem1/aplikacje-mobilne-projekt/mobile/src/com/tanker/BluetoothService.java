@@ -94,16 +94,16 @@ public class BluetoothService extends Service {
     public void setDriveData(DriveKey key) {
         switch(key) {
             case UP:
-                this.driveString = "up";
+                this.driveString = "UP";
                 break;
             case DOWN:
-                this.driveString = "down";
+                this.driveString = "DOWN";
                 break;
             case LEFT:
-                this.driveString = "left";
+                this.driveString = "LEFT";
                 break;
             case RIGHT:
-                this.driveString = "right";
+                this.driveString = "RIGHT";
                 break;
         }
     }

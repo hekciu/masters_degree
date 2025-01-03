@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
     };
 
     public void drive(BluetoothService.DriveKey key) {
+        Log.d(LOG_TAG, "DRIVEEEEE");
         if (this.bluetoothService == null) {
             Log.d(LOG_TAG, "tried to send message to service, but this.bluetoothService is null");
             return;
