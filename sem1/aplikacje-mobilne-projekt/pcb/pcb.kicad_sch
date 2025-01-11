@@ -1300,7 +1300,7 @@
     (property "Reference" "R1" (id 0) (at 250.19 49.5299 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "500k" (id 1) (at 250.19 52.0699 0)
+    (property "Value" "1k" (id 1) (at 250.19 52.0699 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "" (id 2) (at 245.872 50.8 90)
@@ -1669,7 +1669,7 @@
       (reference "Q13") (unit 1) (value "IRL6283M") (footprint "Package_DirectFET:DirectFET_MD")
     )
     (path "/6121ba13-0ef7-4e06-99e1-925d76a451ab"
-      (reference "R1") (unit 1) (value "500k") (footprint "")
+      (reference "R1") (unit 1) (value "1k") (footprint "")
     )
   )
 )
