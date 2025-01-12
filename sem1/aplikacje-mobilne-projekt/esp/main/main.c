@@ -27,6 +27,9 @@ void drive_task(void * _) {
 void app_main(void) {
     printf("starting\n");
 
+    drive_setup();
+    drive_reset();
+
     BaseType_t xReturned;
     TaskHandle_t xHandle = NULL;
 
